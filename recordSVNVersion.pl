@@ -7,6 +7,8 @@ use Carp;
 
 my $isDistributionBuild = 0;
 
+exit 0;  # For GitHub builds, for now
+
 # Only push the current branch
 sub setupGitConfig {
     my $cmd = "git config --global push.default simple";
