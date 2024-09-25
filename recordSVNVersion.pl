@@ -128,10 +128,9 @@ sub getVersion {
         my $shortVersion = $1;
         $version = "g$shortVersion";
     } else {
-        chomp(my $gitVersion = `git describe --match "r1"`);
-        $gitVersion =~ /^r1-(\d+)-(g.......)$/
-          or die "No git describe fails:  Is there no 'r1' tag in this git repository?\n";
-        $version = $2;
+        chomp(my $gitVersion = `git rev-parse --short HEAD`);
+        $gitVersion =~ /^(.......)$/
+          or die "No git rev-parse fails for $gitVersion\n";
         my $modified = "";
         open PIPE, "git status|"
           or die "Couldn't open pipe to git st: $!\n";
